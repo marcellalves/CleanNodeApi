@@ -4,6 +4,11 @@ import { MissingParamError } from '../../../../dist/src/presentation/errors/miss
 
 export class LoginController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    return new Promise(resolve => resolve(badRequest(new MissingParamError('email'))))
+    if (!httpRequest.body.email) {
+      return new Promise(resolve => resolve(badRequest(new MissingParamError('email'))))
+    }
+    if (!httpRequest.body.pasword) {
+      return new Promise(resolve => resolve(badRequest(new MissingParamError('password'))))
+    }
   }
 }
